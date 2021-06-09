@@ -1,7 +1,5 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
-import {FormControl, FormHelperText, InputLabel, makeStyles, NativeSelect} from "@material-ui/core";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../redux/store";
+import React, {ChangeEvent, useEffect} from "react";
+import {FormControl, FormHelperText, InputLabel, NativeSelect} from "@material-ui/core";
 import {CurrencyItemType} from "../../../redux/currency/currencyR";
 
 interface CurrencyConverterProps {
@@ -13,9 +11,6 @@ interface CurrencyConverterProps {
 
 export const CurrencyConverter: React.FC<CurrencyConverterProps> = ({target,state,setState, currencies}) => {
 
-    // const [curr1, setCurr1] = useState("")
-    // const [curr2, setCurr2] = useState("")
-
     const handleChange = (event: ChangeEvent<{name:string, value: string}>) => {
         setState(event.target.value)
         if(!target)
@@ -26,9 +21,9 @@ export const CurrencyConverter: React.FC<CurrencyConverterProps> = ({target,stat
 
     useEffect(() => {
         if(!target) {
-            setState(JSON.parse(localStorage.getItem("currency1") || ""))
+            setState(!!localStorage.getItem("currency1")?(JSON.parse(localStorage.getItem("currency1") as string)): "")
         } else {
-            setState(JSON.parse(localStorage.getItem("currency2") || ""))
+            setState(!!localStorage.getItem("currency2")?(JSON.parse(localStorage.getItem("currency2") as string)): "")
         }
     },[])
 

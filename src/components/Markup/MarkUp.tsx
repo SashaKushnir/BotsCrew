@@ -8,19 +8,25 @@ import {currencyA} from "../../redux/currency/currencyA";
 
 export const Markup = () => {
     const d = useDispatch()
-    const currenciesLS = JSON.parse(localStorage.getItem("currencies") || "[]")
+    let currenciesLS: any
+    if (!!localStorage.getItem("currencies"))
+        currenciesLS = JSON.parse(localStorage.getItem("currencies") as string)
+    else {
+        currenciesLS = ""
+    }
+
     const loc = window.location.href
     useEffect(() => {
-        if(!currenciesLS)
-        d(getFullListOfCurrencies())
+        if (!currenciesLS)
+            d(getFullListOfCurrencies())
         else
             d(currencyA.setCurrenciesArr(currenciesLS))
-    },[])
+    }, [])
     return <div>
         <Header currentLocation={loc}>
             {loc.includes("/content/all_currencies") ? <Typography component={'span'}>
                 All currencies header
-            </Typography>: <Typography component={'span'}>
+            </Typography> : <Typography component={'span'}>
                 Currency counter header
             </Typography>}
         </Header>

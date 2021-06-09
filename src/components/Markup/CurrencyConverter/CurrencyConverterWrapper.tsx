@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {CurrencyConverter} from "./CurrencyConverter";
-import {Button, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
+import {Button, Grid, TextField, Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {exchange} from "../../../redux/currency/currencyT";
@@ -11,8 +11,8 @@ export const CurrencyConverterWrapper = () => {
     const d = useDispatch()
     const exchangeRes = useSelector((state: RootState) => state.currencyR.exchangeRes)
     const currencies = useSelector((state: RootState) => state.currencyR.currencyArr)
-    const [currency1, setCurrencyState1] = React.useState<string>(currencies ? currencies[0].id : "");
-    const [currency2, setCurrencyState2] = React.useState<string>(currencies ? currencies[0].id : "");
+    const [currency1, setCurrencyState1] = React.useState<string>("");
+    const [currency2, setCurrencyState2] = React.useState<string>("");
     const [numInput, setNumInput] = React.useState("");
     const inputHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.value.length) {
